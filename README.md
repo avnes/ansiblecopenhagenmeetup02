@@ -9,5 +9,5 @@ Presented at: Ansible Copenhagen Meetup #02
 * [About me](about.md)
 * [What is PaaS?](PaaS.md)
 * The competition: [Tools to automate Azure resources](tools.md)
-* [What are ARM templates?](arm.md)
+* [Azure Resource Manager templates](arm.md)
 * [Azure Resource Manager modules for Ansible](ansible.md)

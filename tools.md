@@ -272,65 +272,18 @@ The azure_rm_\[feature]_facts modules are useful for documenting resources that 
       with_items: "{{ az_blob_storage }}"
 ```
 
-In order to work with these modules, it is important to know about a concept called Azure Resource Manager templates.
+## Azure and ARM
 
-### Azure Resource Manager templates
-
-Azure Resource Manager templates, or ARM for short, is a JSON file that describes zero to many Azure resources. To quote the official documentation at <https://azure.microsoft.com/en-us/resources/templates/>:
-
-> *Azure Resource Manager allows you to provision your applications using a declarative template.*
-> *In a single template, you can deploy multiple services along with their dependencies.*
-
-When Azure evaluates an ARM template, it will look at the delta between the current state, and the new state, and hence changes will be incremental. This evaluation happens on the Azure side; in contrast to Terraform, where the evaluation happens locally.
-
-If you apply an empty ARM template to an existing resource group, and set deployment mode to complete, all resources will be wiped, like in the example below:
-
-```json
-{
-    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-    "contentVersion": "1.0.0.0",
-    "parameters": {},
-    "variables": {},
-    "resources": [],
-    "outputs": {}
-}
-```
-
-When using ARM you will always supply a template, and most of the time you will also supply a parameter file.
-
-### Azure and ARM
+In order to work with these modules, it is beneficial to know about a concept called Azure Resource Manager (ARM) templates.
 
 By using the Azure Resource Manager modules for Ansible, you take a way a lot of the complexity of ARM, by simply using YAML syntax to describe your needs. However if you need to automate a resource for which there is no Ansible module, or if a module lack features you would like to use, you can use the generic **azure_rm_deployment** module.
 
-### azure_rm_deployment
-
-The **azure_rm_deployment** module lets you supply an ARM template either as YAML or JSON file. Optionally you can also supply a parameter file in either YAML, JSON or as inline parameters (YAML). You can even "template the template" with Jinja2.
-
-Note: When using JSON files, you need to serve them over HTTP. That is why I personally prefer local YAML files. Lifeline: <https://www.json2yaml.com/>
-
-```yaml
-- name: Provision Azure Cosmos DB from template
-  azure_rm_deployment:
-    subscription_id: "{{ az_subscription_id }}"
-    client_id: "{{ az_client_id }}"
-    secret: "{{ az_client_secret }}"
-    tenant: "{{ az_tenant_id }}"
-    location: "{{ az_region }}"
-    resource_group_name: "{{ az_resource_group }}"
-    template: "{{ template_cosmosdb }}"
-    parameters: "{{ item }}"
-  loop: "{{ COSMOSDB }}"
-  when: COSMOSDB is defined
-```
-
-The Azure CosmosDB example will be covered in full later in this presentation.
-
 ### Ansible pros
 
-* Using an Ansible module is simpler than learning ARM.
+* Using an Ansible module is simpler than learning Azure Resource Manager.
 * You don't (necessarily) need to learn another tool.
 * You can use the uri module with Azure REST API to add more complex workflows.
-* Create complex and dynamic ARM templates using Jinja2.
+* Create complex and dynamic Azure Resource Manager templates using Jinja2.
 
 ### Ansible cons
 
