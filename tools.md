@@ -225,3 +225,113 @@ resource_group_name = "dummy"
 * Documentation is not always up to date. Sometimes the API have changed, and the documentation has not.
 * Not all operations have meaningful names.
 * Resource 'properties' object not fond of loops. Apply properties with caution.
+
+## Ansible
+
+Ansible 2.7 currently supports 71 modules for managing resources on Azure through Azure Resource Manager.
+
+In order to use Azure Resource Manager modules for Ansible, you also need to install Azure SDK modules:
+
+```bash
+pip install 'ansible[azure]'
+```
+
+Refer to <https://docs.ansible.com/ansible/latest/scenario_guides/guide_azure.html> for how to deal with authentication.
+
+Most of the Azure Resource Manager modules for Ansible comes in pairs of two:
+
+* azure_rm_\[feature]
+* azure_rm_\[feature]_facts
+
+Where the former is used to create/update/delete Azure resources, and the latter is to gather facts from the resources.
+The azure_rm_\[feature]_facts modules are usefull for documenting resources that have been created manually through the Azure Portal, or through a different automation language.
+
+### Ansible example
+
+```yaml
+---
+- hosts: all
+  vars:
+    az_resourcegroup: dummy
+    az_blob_storage:
+      - container: "test-container1"
+        storage_account: "teststorageacc"
+      - container: "test-container2"
+        storage_account: "teststorageacc"
+  tasks:
+    - name: Provision Azure Blob Storage
+      azure_rm_storageblob:
+        container: "{{ item.container }}"
+        storage_account_name: "{{ item.storage_account }}"
+        state: "{{ item.state | default('present') }}"
+        subscription_id: "{{ az_subscription_id }}"
+        client_id: "{{ az_client_id }}"
+        secret: "{{ az_client_secret }}"
+        tenant: "{{ az_tenant_id }}"
+        resource_group: "{{ item.resource_group | default(az_resourcegroup) }}"
+      with_items: "{{ az_blob_storage }}"
+```
+
+In order to work with these modules, it is important to know about a concept called Azure Resouce Manager templates.
+
+### Azure Resouce Manager templates
+
+Azure Resouce Manager templates, or ARM for short, is a JSON file that describes zero to many Azure resources. To quote the official documentaion at <https://azure.microsoft.com/en-us/resources/templates/>:
+
+> *Azure Resource Manager allows you to provision your applications using a declarative template.*
+> *In a single template, you can deploy multiple services along with their dependencies.*
+
+When Azure evalutes an ARM template, it will (in most cases) look at the delta between the current state, and the new state, and hence changes will be incremental. It also means that if you apply an empty template to an existing resource group and set deployment mode to complete, all resources will be wiped, like in the example below:
+
+```json
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {},
+    "variables": {},
+    "resources": [],
+    "outputs": {}
+}
+```
+
+When using ARM you will always supply a template, and most of the time you will also supply a parameter file.
+
+### Azure and ARM
+
+By using the Azure Resource Manager modules for Ansible, you take a way a lot of the complexity of ARM, by simply using YAML syntax to describe your needs. However if you need to automate a resource for which there is no Ansible module, or if a module lack features you would like to use, you can use the generic **azure_rm_deployment** module.
+
+### azure_rm_deployment
+
+The **azure_rm_deployment** module lets you supply an ARM template either as YAML or JSON file. Optionally you can also supply a parameter file in either YAML, JSON or as inline parameters (YAML). You can even "template the template" with Jinja2.
+
+Note: When using JSON files, you need to serve them over HTTP. That is why I personally prefer local YAML files. Lifeline: <https://www.json2yaml.com/>
+
+```yaml
+- name: Provision Azure Cosmos DB from template
+  azure_rm_deployment:
+    subscription_id: "{{ az_subscription_id }}"
+    client_id: "{{ az_client_id }}"
+    secret: "{{ az_client_secret }}"
+    tenant: "{{ az_tenant_id }}"
+    location: "{{ az_region }}"
+    resource_group_name: "{{ az_resource_group }}"
+    template: "{{ template_cosmosdb }}"
+    parameters: "{{ item }}"
+  loop: "{{ COSMOSDB }}"
+  when: COSMOSDB is defined
+```
+
+The Azure CosmosDB example will be covered in full later in this presentation.
+
+### Ansible pros
+
+* Using an Ansible module is simpler than learning ARM.
+* You don't (necessarily) need to learn another tool.
+* You can use the uri module with Azure REST API to add more complex workflows.
+* Create complex and dynamic ARM templates using Jinja2.
+
+### Ansible cons
+
+* Azure Resource Manager templates have a steep learning curve when using azure_rm_deployment.
+* Transforming JSON to YAML takes some getting used to.
+* When using Jinja2 extensively, there is a high risk of creating a Terraform clone.
