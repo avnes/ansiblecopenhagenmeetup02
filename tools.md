@@ -37,7 +37,7 @@ Find-AzureRmResource -ResourceType "microsoft.web/sites" -ResourceGroupNameConta
 ## Azure CLI
 
 ```bash
-hideme=$(az login --service-principal --username $AZURE_CLIENT_ID --password $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID)
+hide_me=$(az login --service-principal --username $AZURE_CLIENT_ID --password $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID)
 
 az configure --defaults group=$AZURE_RM_NAME
 
@@ -197,7 +197,7 @@ resource_group_name = "dummy"
       set_fact:
         azure_bearer: "{{ login.json.access_token }}"
 
-    - name: "List all App Services in resourse group"
+    - name: "List all App Services in resource group"
       uri:
         url: "{{ az_mgnt_url }}/providers/Microsoft.Web/sites?api-version={{ az_api_version }}"
         method: GET
@@ -221,7 +221,7 @@ resource_group_name = "dummy"
 
 ### Azure REST API Cons
 
-* Difficult to find correct resourse URI to use. Lifeline: <https://resources.azure.com/>
+* Difficult to find correct resource URI to use. Lifeline: <https://resources.azure.com/>
 * Documentation is not always up to date. Sometimes the API have changed, and the documentation has not.
 * Not all operations have meaningful names.
 * Resource 'properties' object not fond of loops. Apply properties with caution.
@@ -244,7 +244,7 @@ Most of the Azure Resource Manager modules for Ansible comes in pairs of two:
 * azure_rm_\[feature]_facts
 
 Where the former is used to create/update/delete Azure resources, and the latter is to gather facts from the resources.
-The azure_rm_\[feature]_facts modules are usefull for documenting resources that have been created manually through the Azure Portal, or through a different automation language.
+The azure_rm_\[feature]_facts modules are useful for documenting resources that have been created manually through the Azure Portal, or through a different automation language.
 
 ### Ansible example
 
@@ -252,7 +252,7 @@ The azure_rm_\[feature]_facts modules are usefull for documenting resources that
 ---
 - hosts: all
   vars:
-    az_resourcegroup: dummy
+    az_resource_group: dummy
     az_blob_storage:
       - container: "test-container1"
         storage_account: "teststorageacc"
@@ -268,20 +268,22 @@ The azure_rm_\[feature]_facts modules are usefull for documenting resources that
         client_id: "{{ az_client_id }}"
         secret: "{{ az_client_secret }}"
         tenant: "{{ az_tenant_id }}"
-        resource_group: "{{ item.resource_group | default(az_resourcegroup) }}"
+        resource_group: "{{ item.resource_group | default(az_resource_group) }}"
       with_items: "{{ az_blob_storage }}"
 ```
 
-In order to work with these modules, it is important to know about a concept called Azure Resouce Manager templates.
+In order to work with these modules, it is important to know about a concept called Azure Resource Manager templates.
 
-### Azure Resouce Manager templates
+### Azure Resource Manager templates
 
-Azure Resouce Manager templates, or ARM for short, is a JSON file that describes zero to many Azure resources. To quote the official documentaion at <https://azure.microsoft.com/en-us/resources/templates/>:
+Azure Resource Manager templates, or ARM for short, is a JSON file that describes zero to many Azure resources. To quote the official documentation at <https://azure.microsoft.com/en-us/resources/templates/>:
 
 > *Azure Resource Manager allows you to provision your applications using a declarative template.*
 > *In a single template, you can deploy multiple services along with their dependencies.*
 
-When Azure evalutes an ARM template, it will (in most cases) look at the delta between the current state, and the new state, and hence changes will be incremental. It also means that if you apply an empty template to an existing resource group and set deployment mode to complete, all resources will be wiped, like in the example below:
+When Azure evaluates an ARM template, it will look at the delta between the current state, and the new state, and hence changes will be incremental. This evaluation happens on the Azure side; in contrast to Terraform, where the evaluation happens locally.
+
+If you apply an empty ARM template to an existing resource group, and set deployment mode to complete, all resources will be wiped, like in the example below:
 
 ```json
 {
