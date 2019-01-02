@@ -1,6 +1,6 @@
 # Tools to automate Azure resources
 
-List of tools I have used (briefly or frequently) to automate or manage Azure resources. There are probably more options out there, but this is just to give you an idea of the competition.
+List of tools I use (or have evaluated) to automate or manage Azure resources. There are probably more options out there, but this is just to give you an idea of the competition.
 
 | Tool             | Vendor    | Documentation                                                                                                                 |
 | ---------------- | --------- | ----------------------------------------------------------------------------------------------------------------------------- |
