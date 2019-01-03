@@ -1,0 +1,10 @@
+---
+---
+az_tenant_id: "{{ vault_az_tenant_id }}"
+az_client_id: "{{ vault_az_client_id }}"
+az_client_secret: "{{ vault_az_client_secret }}"
+az_subscription_id: "{{ vault_az_subscription_id }}"
+az_token_url: "https://login.microsoftonline.com/{{ az_tenant_id }}/oauth2/token"
+az_token_body: "resource=https://management.core.windows.net/&client_id={{ az_client_id }}&grant_type=client_credentials&client_secret={{ az_client_secret }}"
+az_mgnt_url: "https://management.azure.com/subscriptions/{{ azure_subscription_id }}"
+az_resource_group: "{{ vault_az_resource_group }}"

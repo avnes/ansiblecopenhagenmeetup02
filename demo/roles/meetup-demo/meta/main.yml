@@ -1,0 +1,17 @@
+galaxy_info:
+  author: Audun Nes
+  description: Demo role to show the different strategies to manage Azure PaaS services with Ansible
+
+  license: license (MIT)
+
+  min_ansible_version: 2.7
+
+  platforms:
+    - name: Fedora
+      versions:
+        - all
+        - 29
+
+  galaxy_tags: []
+
+dependencies: []
