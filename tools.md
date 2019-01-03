@@ -80,7 +80,6 @@ credentials = ServicePrincipalCredentials(
     tenant=os.environ['AZURE_TENANT_ID']
 )
 
-resource_client = ResourceManagementClient(credentials, subscription_id)
 web_client = WebSiteManagementClient(credentials, subscription_id)
 
 
