@@ -68,7 +68,6 @@ echo
 
 import os
 from azure.common.credentials import ServicePrincipalCredentials
-from azure.mgmt.resource import ResourceManagementClient
 from azure.mgmt.web import WebSiteManagementClient
 
 subscription_id = os.environ['AZURE_SUBSCRIPTION_ID']
