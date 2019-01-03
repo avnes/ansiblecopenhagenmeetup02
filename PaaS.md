@@ -5,3 +5,5 @@ Platform as a Service (PaaS) is a cloud service that gives you a ready platform 
 Infrastructure as a service (IaaS) on the other hand makes you able to create virtual machines, network resources and storage solutions. This can be useful if you need to use software that is not provided as a platform service.
 
 Today I will share my experience with using Ansible for provisioning PaaS resources on Microsoft Azure.
+
+[Back](README.md)

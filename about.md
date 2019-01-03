@@ -20,3 +20,5 @@ For the past year I have been spending 80% of my time on a commercial project wh
 * Azure Web Apps for Containers
 
 Ansible, Jinja2 Azure Resource Manager templates are our configuration management and automation tools on the project. We use Jenkins for continuous integration. We strive to automate everything.
+
+[Back](README.md)

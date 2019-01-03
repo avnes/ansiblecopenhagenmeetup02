@@ -54,3 +54,5 @@ Another way to get a template is to create the resource manually through the Azu
 When applying properties to a resource, you will not be able to do as above. I guess Azure Portal is relying on the Azure REST API when updating a resource, and hence you will not see a deployment template for changes.
 
 Your final lifeline is to navigate to a resource group and look at the *Automation script*, which will let you download a template containing all resources in that resource group (except some Azure Insights resources). Please note that this template will be extremely large; often spanning 10 000+ lines, and instead of parameters, you will have hard coded values. This makes that template less than ideal for reusable automation, but it is still great blueprint when creating your own parameterized templates.
+
+[Back](README.md)
