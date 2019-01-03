@@ -2,7 +2,7 @@
 
 Name: **Audun V. Nes**
 
-I am working as a Systems Engineer and Tech Lead for Ansible in an agile build team where we develop and maintain the CI/CD pipeline for Maersk Transport & Logistics One Technology Application Development. We are about 25 employees and 5+ contractors on the team, and we are geographically located in Copenhagen, Denmark and Maidenhead, United Kingdom.
+I am working as a Systems Engineer and Tech Lead for Ansible in an agile build team where we develop and maintain the CI/CD pipeline for Maersk Transport & Logistics One Technology Application Development. We are about 25 employees and 5-10 contractors on the team, and we are geographically located in Copenhagen, Denmark and Maidenhead, United Kingdom.
 
 For the past year I have been spending 80% of my time on a commercial project where I do CI/CD pipeline work to support Angular and Spring Boot developers. We also do platform work by automating the provisioning of Microsoft Azure PaaS services like:
 
