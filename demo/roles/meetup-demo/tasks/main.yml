@@ -1,1 +1,4 @@
 ---
+- name: Do nothing yet
+  debug:
+    msg: "Just testing role basic functionality"

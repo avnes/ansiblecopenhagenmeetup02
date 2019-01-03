@@ -1,5 +1,4 @@
 ---
----
 az_tenant_id: "{{ vault_az_tenant_id }}"
 az_client_id: "{{ vault_az_client_id }}"
 az_client_secret: "{{ vault_az_client_secret }}"
