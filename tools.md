@@ -226,7 +226,7 @@ resource_group_name = "dummy"
 
 ## Ansible
 
-Ansible 2.7 currently supports 71 modules for managing resources on Azure through Azure Resource Manager.
+Ansible 2.7 supports 71 modules for managing resources on Azure through Azure Resource Manager.
 
 In order to use Azure Resource Manager modules for Ansible, you also need to install Azure SDK modules:
 
