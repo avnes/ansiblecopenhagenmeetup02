@@ -1,1 +1,1 @@
-# Azure Resource Manager modules for Ansible
+# Using Azure Resource Manager modules for Ansible
