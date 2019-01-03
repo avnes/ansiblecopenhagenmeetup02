@@ -177,9 +177,8 @@ resource_group_name = "dummy"
     az_client_secret: "{{ vault_az_client_secret }}"
     az_subscription_id: "{{ vault_az_subscription_id }}"
     az_token_url: "https://login.microsoftonline.com/{{ az_tenant_id }}/oauth2/token"
-    az_token_body: "resource=https://management.core.windows.net/&client_id={{ az_client_id }}&grant_type=client_credentials"
-    az_mgnt_url: "https://management.azure.com/subscriptions/{{ azure_subscription_id }}"
-    az_api_version: 2016-08-01
+    az_token_body: "resource=https://management.core.windows.net/&client_id={{ az_client_id }}&grant_type=client_credentials&client_secret={{ az_client_secret }}"
+    az_mgnt_url: "https://management.azure.com/subscriptions/{{ az_subscription_id }}"
   tasks:
     - name: Login to Azure
       uri:
@@ -190,25 +189,27 @@ resource_group_name = "dummy"
           Content-Type: "application/x-www-form-urlencoded"
         status_code: 200
       register: login
+      no_log: True
 
     - name: Setting Bearer token as fact
       set_fact:
         azure_bearer: "{{ login.json.access_token }}"
+      no_log: True
 
     - name: "List all App Services in resource group"
       uri:
-        url: "{{ az_mgnt_url }}/providers/Microsoft.Web/sites?api-version={{ az_api_version }}"
+        url: "{{ az_mgnt_url }}/providers/Microsoft.Web/sites?api-version=2016-08-01"
         method: GET
         headers:
           Authorization: "Bearer {{ azure_bearer }}"
         status_code: 200
       register: app_services
+      no_log: True
 
     - name: Print list of App Service names
       debug:
         msg: "{{ item.name }}"
       with_items: "{{ app_services.json.value }}"
-      verbosity: 0
 ```
 
 ### Azure REST API Pros
