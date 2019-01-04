@@ -7,7 +7,7 @@ In this role I will demonstrate how you can create resources on Microsoft Azure 
 * Use the azure_rm_sqlserver and azure_rm_sqldatabase modules to create Azure SQL server and instances.
 * Provision one Azure Cosmos DB using inline parameters with the generic azure_rm_deployment module.
 * Provision two Azure Cosmos DBs using parameters from a list variable with the generic azure_rm_deployment module.
-* Provision three Azure Cosmos DBs using a list variable and Jinja2
+* Provision three Azure Cosmos DBs using list variables and Jinja2.
 
 ## Requirements
 
@@ -39,48 +39,7 @@ None
 
 ## Example Playbook
 
-```yaml
----
-- hosts: localhost
-  vars:
-    az_sql_server_name: ansiblecphsrv
-    az_sql_username: "{{ vault_az_sql_username }}"
-    az_sql_password: "{{ vault_az_sql_password }}"
-    az_sql_database_name_prefix: ansiblecphdb
-    az_sql_databases:
-      - create_mode: default
-        edition: free
-      - create_mode: default
-        edition: basic
-
-    az_number_of: 1
-    az_location_name: "North Europe"
-
-    az_cosmos_db:
-      -
-        name:
-          value: ansiblecphcdb11
-        location:
-          value: "{{ az_location }}"
-        locationName:
-          value: "{{ az_location_name }}"
-        defaultExperience:
-          value: Cassandra
-      -
-        name:
-          value: ansiblecphcdb12
-        location:
-          value: "{{ az_location }}"
-        locationName:
-          value: "{{ az_location_name }}"
-        defaultExperience:
-          value: Cassandra
-
-  roles:
-    - meetup-demo
-```
-
-Pass in the variable *az_resource* in through --extra-vars from the command line. This variable needs to either have the value *sql* or *cosmosdb*.
+Please see demo/sql.yml and demo/cosmosdb.yml
 
 ## License
 

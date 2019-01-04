@@ -1,0 +1,49 @@
+---
+- hosts: localhost
+  vars:
+    az_resource: cosmosdb
+    az_location_name: "North Europe"
+    az_name_prefix: ansiblecphm
+
+    # Example 1
+    az_number_of: 1
+
+    # Example 2
+    az_cosmos_db:
+      -
+        name:
+          value: "{{ az_name_prefix }}cdb11"
+        location:
+          value: "{{ az_location }}"
+        locationName:
+          value: "{{ az_location_name }}"
+        defaultExperience:
+          value: Cassandra
+      -
+        name:
+          value: "{{ az_name_prefix }}cdb12"
+        location:
+          value: "{{ az_location }}"
+        locationName:
+          value: "{{ az_location_name }}"
+        defaultExperience:
+          value: Cassandra
+
+    # Example 3
+    az_cosmosdb_name_prefix: "{{ az_name_prefix }}cdb2"
+    az_cosmosdb_accounts:
+      - location: "{{ az_location }}"
+        locationName: "{{ az_location_name }}"
+        defaultExperience: Cassandra
+        databaseAccountOfferType: Standard
+      - location: "westeurope"
+        locationName: "West Europe"
+        defaultExperience: Table
+        databaseAccountOfferType: Standard
+      - location: "eastasia"
+        locationName: "East Asia"
+        defaultExperience: Gremlin
+        databaseAccountOfferType: Standard
+
+  roles:
+    - meetup-demo

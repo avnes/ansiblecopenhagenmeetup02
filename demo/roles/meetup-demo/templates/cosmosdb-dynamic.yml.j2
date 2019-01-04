@@ -1,0 +1,27 @@
+---
+"$schema": https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#
+contentVersion: 1.0.0.0
+{% for cosmosdb in az_cosmosdb_accounts %}
+{% if loop.first %}
+resources:
+{% endif %}
+- apiVersion: '2015-04-08'
+  type: Microsoft.DocumentDB/databaseAccounts
+  kind: "[if(equals('{{ cosmosdb.defaultExperience }}', 'MongoDB'), 'MongoDB', 'GlobalDocumentDB')]"
+  name: "{{ az_cosmosdb_name_prefix }}{{ loop.index }}"
+  location: "{{ cosmosdb.location }}"
+  properties:
+    name: "{{ az_cosmosdb_name_prefix }}{{ loop.index }}"
+    databaseAccountOfferType: "{{ cosmosdb.databaseAccountOfferType }}"
+    locations:
+    - id: "[concat('{{ az_cosmosdb_name_prefix }}{{ loop.index }}', '-', '{{ cosmosdb.location }}')]"
+      failoverPriority: 0
+      locationName: "{{ cosmosdb.locationName }}"
+    enableMultipleWriteLocations: true
+    isVirtualNetworkFilterEnabled: false
+    virtualNetworkRules: []
+    capabilities:
+    - name: "[if(equals('{{ cosmosdb.defaultExperience }}', 'Cassandra'), 'EnableCassandra', if(equals('{{ cosmosdb.defaultExperience }}', 'Gremlin'), 'EnableGremlin', if(equals('{{ cosmosdb.defaultExperience }}', 'MongoDB'), '', if(equals('{{ cosmosdb.defaultExperience }}', 'SQL'), '', if(equals('{{ cosmosdb.defaultExperience }}', 'Table'), 'EnableTable', '')))))]"
+  tags:
+    defaultExperience: "[if(equals('{{ cosmosdb.defaultExperience }}', 'Cassandra'), 'Cassandra', if(equals('{{ cosmosdb.defaultExperience }}', 'Gremlin'), 'Graph', if(equals('{{ cosmosdb.defaultExperience }}', 'MongoDB'), 'MongoDB', if(equals('{{ cosmosdb.defaultExperience }}', 'SQL'), 'DocumentDB', if(equals('{{ cosmosdb.defaultExperience }}', 'Table'), 'Table', '')))))]"
+{% endfor %}
