@@ -12,7 +12,6 @@ cp -r /usr/lib64/python2.7/site-packages/selinux $VIRTUAL_ENV/lib64/python2.7/si
 cp /usr/lib64/python2.7/site-packages/_selinux.so $VIRTUAL_ENV/lib64/python2.7/site-packages
 cd demo
 pip install -r requirements.txt
-ANSIBLE_CONFIG=./role.cfg; export ANSIBLE_CONFIG
 ansible-playbook --inventory ../../my_ansible/inventories/azure/hosts.yml --vault-password-file ~/.my_vault login.yml
 ```
 
@@ -21,7 +20,6 @@ ansible-playbook --inventory ../../my_ansible/inventories/azure/hosts.yml --vaul
 ```bash
 workon ansiblecopenhagenmeetup02
 cd demo
-ANSIBLE_CONFIG=./role.cfg; export ANSIBLE_CONFIG
 ansible-playbook --inventory ../../my_ansible/inventories/azure/hosts.yml --vault-password-file ~/.my_vault --extra-vars "ansible_python_interpreter=${VIRTUAL_ENV}/bin/python" sql.yml
 ```
 
@@ -32,7 +30,6 @@ While it is provisioning, explain the role tasks and default variables.
 ```bash
 workon ansiblecopenhagenmeetup02
 cd demo
-ANSIBLE_CONFIG=./role.cfg; export ANSIBLE_CONFIG
 ansible-playbook --inventory ../../my_ansible/inventories/azure/hosts.yml --vault-password-file ~/.my_vault --extra-vars "ansible_python_interpreter=${VIRTUAL_ENV}/bin/python" cosmosdb.yml
 ```
 
