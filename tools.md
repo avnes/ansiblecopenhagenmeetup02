@@ -18,7 +18,9 @@ I will provide a quick tour of the competition, so you have a reference when we 
 ```ps
 # Login to Azure using service-principal access
 
-Login-AzureRmAccount -Credential (New-Object -TypeName pscredential –ArgumentList ${AZURE_CLIENT_ID}, (ConvertTo-SecureString ${AZURE_CLIENT_SECRET} -AsPlainText –Force)) -ServicePrincipal –TenantId ${AZURE_TENANT_ID};
+Login-AzureRmAccount -Credential (New-Object -TypeName pscredential \
+–ArgumentList ${AZURE_CLIENT_ID}, (ConvertTo-SecureString ${AZURE_CLIENT_SECRET} \
+-AsPlainText –Force)) -ServicePrincipal –TenantId ${AZURE_TENANT_ID};
 
 # List all the App Services
 
@@ -37,7 +39,10 @@ Find-AzureRmResource -ResourceType "microsoft.web/sites" -ResourceGroupNameConta
 ## Azure CLI
 
 ```bash
-hide_me=$(az login --service-principal --username $AZURE_CLIENT_ID --password $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID)
+hide_me=$(az login --service-principal \
+--username $AZURE_CLIENT_ID \
+--password $AZURE_CLIENT_SECRET \
+--tenant $AZURE_TENANT_ID)
 
 az configure --defaults group=$AZURE_RM_NAME
 
