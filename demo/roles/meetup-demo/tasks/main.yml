@@ -3,14 +3,6 @@
   import_tasks: sql.yml
   when: az_resource | lower == 'sql'
 
-- name: Create one Azure Cosmos DBs
-  import_tasks: static.yml
-  when:
-    - az_resource | lower == 'cosmosdb'
-    - az_number_of == 1
-
-- name: Create one Azure Cosmos DBs
-  import_tasks: static.yml
-  when:
-    - az_resource | lower == 'cosmosdb'
-    - az_number_of > 1
+- name: Create one or more Azure Cosmos DBs
+  import_tasks: cosmosdb.yml
+  when: az_resource | lower == 'cosmosdb'

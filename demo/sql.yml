@@ -5,10 +5,11 @@
     az_sql_server_name: ansiblecphsrv
     az_sql_username: "{{ vault_az_sql_username }}"
     az_sql_password: "{{ vault_az_sql_password }}"
+    az_sql_database_name_prefix: ansiblecphdb
     az_sql_databases:
-      - name: ansiblecphdb1
+      - create_mode: default
         edition: free
-      - name: ansiblecphdb2
+      - create_mode: default
         edition: basic
 
   roles:

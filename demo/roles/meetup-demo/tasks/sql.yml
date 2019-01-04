@@ -13,8 +13,8 @@
 
 - name: Provision SQL Databases
   azure_rm_sqldatabase:
-    name: "{{ item.name }}"
-    create_mode: default
+    name: "{{ az_sql_database_name_prefix }}{{ idx }}"
+    create_mode: "{{ item.create_mode }}"
     edition: "{{ item.edition }}"
     zone_redundant: no
     server_name: "{{ az_sql_server_name }}"
@@ -24,4 +24,6 @@
     secret: "{{ az_client_secret }}"
     tenant: "{{ az_tenant_id }}"
     resource_group: "{{ az_resource_group }}"
-  with_items: "{{ az_sql_databases }}"
+  loop: "{{ az_sql_databases }}"
+  loop_control:
+    index_var: idx
