@@ -12,7 +12,8 @@ cp -r /usr/lib64/python2.7/site-packages/selinux $VIRTUAL_ENV/lib64/python2.7/si
 cp /usr/lib64/python2.7/site-packages/_selinux.so $VIRTUAL_ENV/lib64/python2.7/site-packages
 cd demo
 pip install -r requirements.txt
-ansible-playbook --inventory ../../my_ansible/inventories/azure/hosts.yml --vault-password-file ~/.my_vault login.yml
+ansible-playbook --inventory ../../my_ansible/inventories/azure/hosts.yml \
+--vault-password-file ~/.my_vault login.yml
 ```
 
 ## Create one Azure SQL server and two databases
@@ -20,7 +21,9 @@ ansible-playbook --inventory ../../my_ansible/inventories/azure/hosts.yml --vaul
 ```bash
 workon ansiblecopenhagenmeetup02
 cd demo
-ansible-playbook --inventory ../../my_ansible/inventories/azure/hosts.yml --vault-password-file ~/.my_vault --extra-vars "ansible_python_interpreter=${VIRTUAL_ENV}/bin/python" sql.yml
+ansible-playbook --inventory ../../my_ansible/inventories/azure/hosts.yml \
+--vault-password-file ~/.my_vault \
+--extra-vars "ansible_python_interpreter=${VIRTUAL_ENV}/bin/python" sql.yml
 ```
 
 While it is provisioning, explain the role tasks and default variables.
@@ -30,7 +33,9 @@ While it is provisioning, explain the role tasks and default variables.
 ```bash
 workon ansiblecopenhagenmeetup02
 cd demo
-ansible-playbook --inventory ../../my_ansible/inventories/azure/hosts.yml --vault-password-file ~/.my_vault --extra-vars "ansible_python_interpreter=${VIRTUAL_ENV}/bin/python" cosmosdb.yml
+ansible-playbook --inventory ../../my_ansible/inventories/azure/hosts.yml \
+--vault-password-file ~/.my_vault \
+--extra-vars "ansible_python_interpreter=${VIRTUAL_ENV}/bin/python" cosmosdb.yml
 ```
 
 ## Provision two Azure Cosmos DBs using parameters from a list variable
@@ -38,7 +43,10 @@ ansible-playbook --inventory ../../my_ansible/inventories/azure/hosts.yml --vaul
 ```bash
 workon ansiblecopenhagenmeetup02
 cd demo
-ansible-playbook --inventory ../../my_ansible/inventories/azure/hosts.yml --vault-password-file ~/.my_vault --extra-vars "ansible_python_interpreter=${VIRTUAL_ENV}/bin/python" --extra-vars '{"az_number_of":2}' cosmosdb.yml
+ansible-playbook --inventory ../../my_ansible/inventories/azure/hosts.yml \
+--vault-password-file ~/.my_vault \
+--extra-vars "ansible_python_interpreter=${VIRTUAL_ENV}/bin/python" \
+--extra-vars '{"az_number_of":2}' cosmosdb.yml
 ```
 
 While it is provisioning, explain the role tasks and default variables.
@@ -48,7 +56,10 @@ While it is provisioning, explain the role tasks and default variables.
 ```bash
 workon ansiblecopenhagenmeetup02
 cd demo
-ansible-playbook --inventory ../../my_ansible/inventories/azure/hosts.yml --vault-password-file ~/.my_vault --extra-vars "ansible_python_interpreter=${VIRTUAL_ENV}/bin/python" --extra-vars '{"az_number_of":3}' cosmosdb.yml
+ansible-playbook --inventory ../../my_ansible/inventories/azure/hosts.yml \
+--vault-password-file ~/.my_vault \
+--extra-vars "ansible_python_interpreter=${VIRTUAL_ENV}/bin/python" \
+--extra-vars '{"az_number_of":3}' cosmosdb.yml
 ```
 
 While it is provisioning, explain the role tasks and default variables.
