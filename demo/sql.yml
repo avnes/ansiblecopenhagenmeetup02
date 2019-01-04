@@ -1,0 +1,15 @@
+---
+- hosts: localhost
+  vars:
+    az_resource: sql
+    az_sql_server_name: ansiblecphsrv
+    az_sql_username: "{{ vault_az_sql_username }}"
+    az_sql_password: "{{ vault_az_sql_password }}"
+    az_sql_databases:
+      - name: ansiblecphdb1
+        edition: free
+      - name: ansiblecphdb2
+        edition: basic
+
+  roles:
+    - meetup-demo

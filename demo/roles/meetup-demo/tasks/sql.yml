@@ -1,0 +1,27 @@
+---
+- name: Provision SQL Server
+  azure_rm_sqlserver:
+    name: "{{ az_sql_server_name }}"
+    location: "{{ az_location }}"
+    admin_username: "{{ az_sql_username }}"
+    admin_password: "{{ az_sql_password }}"
+    subscription_id: "{{ az_subscription_id }}"
+    client_id: "{{ az_client_id }}"
+    secret: "{{ az_client_secret }}"
+    tenant: "{{ az_tenant_id }}"
+    resource_group: "{{ az_resource_group }}"
+
+- name: Provision SQL Databases
+  azure_rm_sqldatabase:
+    name: "{{ item.name }}"
+    create_mode: default
+    edition: "{{ item.edition }}"
+    zone_redundant: no
+    server_name: "{{ az_sql_server_name }}"
+    location: "{{ az_location }}"
+    subscription_id: "{{ az_subscription_id }}"
+    client_id: "{{ az_client_id }}"
+    secret: "{{ az_client_secret }}"
+    tenant: "{{ az_tenant_id }}"
+    resource_group: "{{ az_resource_group }}"
+  with_items: "{{ az_sql_databases }}"
