@@ -64,4 +64,15 @@ ansible-playbook --inventory ../../my_ansible/inventories/azure/hosts.yml \
 
 While it is provisioning, explain the role tasks and default variables.
 
+## Enable IP restrictions with the Azure REST API
+
+```bash
+workon ansiblecopenhagenmeetup02
+cd demo
+ansible-playbook --inventory ../../my_ansible/inventories/azure/hosts.yml \
+--vault-password-file ~/.my_vault login.yml
+```
+
+Explain properties and loops.
+
 [Back](README.md)
