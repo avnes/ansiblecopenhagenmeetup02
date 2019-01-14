@@ -71,7 +71,7 @@ While it is provisioning, explain the role tasks and default variables.
 workon ansiblecopenhagenmeetup02
 cd demo
 ansible-playbook --inventory ../../my_ansible/inventories/azure/hosts.yml \
---vault-password-file ~/.my_vault login.yml
+--vault-password-file ~/.my_vault ip.yml
 ```
 
 Explain properties and loops.
