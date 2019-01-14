@@ -74,6 +74,15 @@ ansible-playbook --inventory ../../my_ansible/inventories/azure/hosts.yml \
 --vault-password-file ~/.my_vault ip.yml
 ```
 
+## Enable IP restrictions with the Azure REST API - add many IPs
+
+```bash
+workon ansiblecopenhagenmeetup02
+cd demo
+ansible-playbook --inventory ../../my_ansible/inventories/azure/hosts.yml \
+--vault-password-file ~/.my_vault many-ip.yml
+```
+
 Explain properties and loops.
 
 [Back](README.md)
