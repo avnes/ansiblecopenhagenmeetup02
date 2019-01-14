@@ -15,10 +15,11 @@ For the past year I have been spending 80% of my time on a commercial project wh
 * Azure DNS
 * Azure Event Grid
 * Azure Insights
+* Azure Log Analytics
 * Azure SQL Server and Elastic Pool
 * Azure Storage Account
 * Azure Web Apps for Containers
 
-Ansible, Jinja2 Azure Resource Manager templates are our configuration management and automation tools on the project. We use Jenkins for continuous integration. We strive to automate everything.
+Ansible, Jinja2 and Azure Resource Manager templates are our configuration management and automation tools on the project. We use Jenkins for continuous integration. We strive to automate everything.
 
 [Back](README.md)
