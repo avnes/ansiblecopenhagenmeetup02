@@ -7,7 +7,8 @@ It's demo time! Please note that the directory containing the Ansible Vault is n
 Show the demo/login.yml playbook, and explain the steps.
 
 ```bash
-mkvirtualenv ansiblecopenhagenmeetup02
+ssh-copy-id localhost # When prompted, enter your password
+mkvirtualenv ansiblecopenhagenmeetup02 --python=python2
 cp -r /usr/lib64/python2.7/site-packages/selinux $VIRTUAL_ENV/lib64/python2.7/site-packages
 cp /usr/lib64/python2.7/site-packages/_selinux.so $VIRTUAL_ENV/lib64/python2.7/site-packages
 cd demo
