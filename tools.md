@@ -311,4 +311,4 @@ By using the Azure Resource Manager modules for Ansible, you take a way a lot of
 * Transforming JSON to YAML takes some getting used to.
 * When using Jinja2 extensively, there is a high risk of creating a Terraform clone.
 
-[Back](README.md)
+[Back](README.md) [Next](arm.md)

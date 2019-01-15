@@ -55,4 +55,4 @@ When applying properties to a resource, you will not be able to do as above. I g
 
 Your final lifeline is to navigate to a resource group and look at the *Automation script*, which will let you download a template containing all resources in that resource group (except some Azure Insights resources). Please note that this template will be extremely large; often spanning 10 000+ lines, and instead of parameters, you will have hard coded values. This makes that template less than ideal for reusable automation, but it is still great blueprint when creating your own parameterized templates.
 
-[Back](README.md)
+[Back](README.md) [Next](ansible.md)
