@@ -8,7 +8,7 @@ List of tools I use (or have evaluated) to automate or manage Azure resources. T
 | Azure CLI        | Microsoft | <https://docs.microsoft.com/en-us/cli/azure/reference-index?view=azure-cli-latest>                                            |
 | Azure Python API | Microsoft | <https://docs.microsoft.com/en-us/python/api/overview/azure/?view=azure-python>                                               |
 | Terraform        | HashiCorp | <https://www.terraform.io/docs/providers/azurerm/index.html>                                                                  |
-| Azure REST API   | Microsoft | <https://docs.microsoft.com/en-us/rest/api/>                                                                                  |
+| Azure REST API   | Microsoft | <https://docs.microsoft.com/en-us/rest/api/?view=Azure>                                                                       |
 | Ansible          | Red Hat   | <https://docs.ansible.com/ansible/latest/scenario_guides/guide_azure.html>                                                    |
 
 I will provide a quick tour of the competition, so you have a reference when we discuss the options for Ansible.
