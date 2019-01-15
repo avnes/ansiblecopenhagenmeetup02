@@ -78,7 +78,7 @@ echo
 
 ### Azure CLI Cons
 
-* No guarantee for machine readable output. Some commands returns nothing, other returns plain text and finally some returns JSON objects.
+* No guarantee for machine readable output. Some commands returns nothing, other returns plain text and finally some returns JSON objects. There is an option called "--output json", but that is still not a guarantee for getting a JSON object back.
 
 ## Azure Python API
 
@@ -100,6 +100,8 @@ credentials = ServicePrincipalCredentials(
 
 web_client = WebSiteManagementClient(credentials, subscription_id)
 
+def get_web_client():
+    return web_client
 
 def get_web_operator():
     return get_web_client().web_apps
