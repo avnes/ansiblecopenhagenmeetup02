@@ -17,14 +17,28 @@ I will provide a quick tour of the competition, so you have a reference when we 
 
 Refer to <https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-core-on-linux?view=powershell-6#fedora> for how to install Powershell on Linux
 
-```ps
-# Login to Azure using service-principal access
+### Install Azure module
 
-Login-AzureRmAccount -Credential (New-Object -TypeName pscredential -ArgumentList ${AZURE_CLIENT_ID}, (ConvertTo-SecureString ${AZURE_CLIENT_SECRET} -AsPlainText -Force)) -ServicePrincipal -TenantId ${AZURE_TENANT_ID};
+```bash
+sudo pwsh
+
+pwsh> Install-Package -Name Az -Source https://www.powershellgallery.com/api/v2 -ProviderName NuGet -ExcludeVersion -Destination /usr/local/share/powershell/Modules
+pwsh> install-module -name az
+```
+
+```bash
+source ~/bin/azure.sh # which sets environment variables AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, AZURE_TENANT_ID and AZURE_RM_NAME
+
+pwsh
+
+# Login to Azure using service-principal access
+pwsh> import-module az
+
+pwsh> Connect-AzAccount -Credential (New-Object -TypeName pscredential -ArgumentList $env:AZURE_CLIENT_ID, (ConvertTo-SecureString $env:AZURE_CLIENT_SECRET -AsPlainText -Force)) -ServicePrincipal -TenantId $env:AZURE_TENANT_ID;
 
 # List all the App Services
 
-Find-AzureRmResource -ResourceType "microsoft.web/sites" -ResourceGroupNameContains ${AZURE_RM_NAME};
+pwsh> Get-AzWebApp -ResourceGroupName $env:AZURE_RM_NAME;
 ```
 
 ### Powershell Pros
