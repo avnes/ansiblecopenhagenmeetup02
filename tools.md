@@ -15,12 +15,12 @@ I will provide a quick tour of the competition, so you have a reference when we 
 
 ## Powershell
 
+Refer to <https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-core-on-linux?view=powershell-6#fedora> for how to install Powershell on Linux
+
 ```ps
 # Login to Azure using service-principal access
 
-Login-AzureRmAccount -Credential (New-Object -TypeName pscredential \
-–ArgumentList ${AZURE_CLIENT_ID}, (ConvertTo-SecureString ${AZURE_CLIENT_SECRET} \
--AsPlainText –Force)) -ServicePrincipal –TenantId ${AZURE_TENANT_ID};
+Login-AzureRmAccount -Credential (New-Object -TypeName pscredential -ArgumentList ${AZURE_CLIENT_ID}, (ConvertTo-SecureString ${AZURE_CLIENT_SECRET} -AsPlainText -Force)) -ServicePrincipal -TenantId ${AZURE_TENANT_ID};
 
 # List all the App Services
 
