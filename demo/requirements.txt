@@ -47,7 +47,7 @@ idna==2.10
 isodate==0.6.0
 Jinja2==2.11.3
 jmespath==0.10.0
-knack==0.3.3
+knack==0.5.2
 MarkupSafe==1.1.1
 msrest==0.6.1
 msrestazure==0.5.0
