@@ -41,7 +41,7 @@ certifi==2023.7.22
 cffi==1.14.5
 chardet==4.0.0
 colorama==0.4.4
-cryptography==42.0.4
+cryptography==42.0.6
 humanfriendly==9.1
 idna==3.7
 isodate==0.6.0
